@@ -1,16 +1,55 @@
-# React + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ✨ PhotoBit ✨
+### *Your premium web-based photobooth experience*
 
-Currently, two official plugins are available:
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](#)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](#)
+[![GSAP](https://img.shields.io/badge/Animations-GSAP-88CE02?logo=greensock&logoColor=white)](#)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+**PhotoBit** brings the magic of instant photography right to your browser. Capture memories, apply stylish filters, and download your personalized photo strips in seconds.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+[**Launch App →**](https://photoboothellobit.vercel.app/)
 
-## Expanding the ESLint configuration
+</div>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🌟 Features
+
+- 📸 **Instant Capture:** High-quality photo sessions directly from your webcam.
+- 🎨 **Creative Layouts:** Choose from Classic, Polaroid, Strips, Grid, and Duo layouts.
+- ✨ **Aesthetic Filters:** Apply professional presets like Midnight, Cyber, Vintage, and more.
+- 📱 **Fully Responsive:** Optimized for both desktop and mobile—fits perfectly in your palm.
+- 💾 **Quick Download:** High-resolution exports ready for social media.
+- 💖 **Socially Connected:** Easily find and connect with the developer.
+
+## 🛠️ Tech Stack
+
+- **Core:** React 19 + Vite
+- **Animations:** GSAP (GreenSock) for smooth transitions
+- **Styling:** Vanilla CSS with a focus on modern glassmorphism
+- **Capture:** `react-webcam` & `html2canvas` for high-quality processing
+
+## 🚀 Getting Started
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/Kaa278/photobooth-web.git
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the dev server**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+<div align="center">
+  Made with ✨ by <a href="https://instagram.com/errdhikaa">@errdhikaa</a>
+</div>

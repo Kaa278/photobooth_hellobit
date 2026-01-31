@@ -10,6 +10,13 @@ const Preview = () => {
     const containerRef = useRef(null);
     const [customText, setCustomText] = useState('HelloBit');
     const [selectedTemplate, setSelectedTemplate] = useState('default');
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 600);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         gsap.fromTo(containerRef.current,
@@ -112,27 +119,43 @@ const Preview = () => {
 
         switch (selectedLayout) {
             case 'classic':
-                return { ...base, width: '600px', aspectRatio: '4/3', display: 'flex' };
+                return { ...base, width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '10px' };
             case 'wide':
-                return { ...base, width: '640px', aspectRatio: '16/9', display: 'flex' };
+                return { ...base, width: '100%', maxWidth: '640px', display: 'flex', flexDirection: 'column', gap: '10px' };
             case 'polaroid':
                 return {
                     ...base,
-                    width: '400px',
-                    paddingBottom: '80px', // Extra bottom space
+                    width: '100%',
+                    maxWidth: isMobile ? '240px' : '400px', // Smaller on mobile to fit height
+                    paddingBottom: isMobile ? '40px' : '80px',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '1rem',
+                    gap: isMobile ? '0.5rem' : '1rem',
                     boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
                 };
             case 'strip3':
-                return { ...base, width: '300px', display: 'flex', flexDirection: 'column', gap: '10px' };
+                return {
+                    ...base,
+                    width: '100%',
+                    maxWidth: isMobile ? '160px' : '300px', // Drastically reduced for mobile height fit
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px'
+                };
             case 'strip4':
-                return { ...base, width: '300px', display: 'flex', flexDirection: 'column', gap: '10px' };
+                return {
+                    ...base,
+                    width: '100%',
+                    maxWidth: isMobile ? '160px' : '300px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px'
+                };
             case 'grid2x2':
                 return {
                     ...base,
-                    width: '600px',
+                    width: '100%',
+                    maxWidth: '600px',
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
                     gap: '10px',
@@ -141,7 +164,8 @@ const Preview = () => {
             case 'grid2x3':
                 return {
                     ...base,
-                    width: '600px',
+                    width: '100%',
+                    maxWidth: '600px',
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
                     gap: '10px',
@@ -150,13 +174,14 @@ const Preview = () => {
             case 'duo':
                 return {
                     ...base,
-                    width: '600px',
-                    display: 'flex',
-                    gap: '10px',
-                    aspectRatio: '2/1'
+                    width: '100%',
+                    maxWidth: '600px',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '10px'
                 };
             default:
-                return { ...base, width: '600px', aspectRatio: '4/3', display: 'flex' };
+                return { ...base, width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '10px' };
         }
     };
 
@@ -217,7 +242,7 @@ const Preview = () => {
                 </div>
             </div>
 
-            <div style={{ overflow: 'auto', maxHeight: '70vh', padding: '1rem', marginBottom: '1rem' }}>
+            <div style={{ overflow: 'auto', maxHeight: '70vh', padding: '1rem', marginBottom: '1rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <div ref={resultRef} style={{ ...continuousStyle, opacity: 1, filter: 'none' }}>
                     {photos.map((img, idx) => (
                         <img
@@ -226,7 +251,7 @@ const Preview = () => {
                             alt={`Shot ${idx + 1}`}
                             style={{
                                 width: '100%',
-                                height: '100%',
+                                height: (selectedLayout === 'grid2x2' || selectedLayout === 'grid2x3') ? '100%' : 'auto',
                                 objectFit: 'cover',
                                 display: 'block',
                                 filter: currentTemplate.filter || 'none'
@@ -240,7 +265,7 @@ const Preview = () => {
                         color: currentTemplate.text,
                         fontSize: '1.2rem',
                         fontWeight: 'bold',
-                        gridColumn: (selectedLayout === 'grid2x2' || selectedLayout === 'grid2x3') ? 'span 2' : 'auto'
+                        gridColumn: (selectedLayout === 'grid2x2' || selectedLayout === 'grid2x3' || selectedLayout === 'duo') ? 'span 2' : 'auto'
                     }}>
                         {customText}
                     </div>
